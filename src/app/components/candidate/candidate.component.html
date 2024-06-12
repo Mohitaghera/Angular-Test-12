@@ -1,0 +1,25 @@
+<div class="container">
+  <app-sidebar></app-sidebar>
+
+  <div class="candidate-container">
+    <div class="header">
+      <button class="add__Job--btn" mat-flat-button color="primary" [disabled]="!addCandidatePermission">Add Candidate</button>
+    </div>
+    <div class="candidate" *ngFor="let candidate of candidates">
+      <div class="candidate-header">
+        <p class="candidate-name">{{candidate}}</p>
+        <button mat-button color="primary" [disabled]="!editCandidatePermission">Edit Candidate</button>
+
+      </div>
+      <div class="jov-view">
+        <p class="view">View</p>
+        <div class="view-actions">
+          <button mat-button color="primary" [disabled]="!viewCandidateProfilePermission"> Candidate Profile</button>
+          <button mat-button color="warn" [disabled]="!viewCandidateHistoryPermission"> Candidate History</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+</div>

@@ -1,0 +1,14 @@
+<div class="container">
+  <app-sidebar></app-sidebar>
+
+  <div class="setting-container">
+    <div class="setting" *ngFor="let setting of settings">
+      <p class="setting-name">{{ setting }}</p>
+
+      <div class="view-actions">
+        <button mat-button color="primary" [disabled]="!viewLogsPermission">View Logs</button>
+        <button mat-button color="primary" [disabled]="!manageSettingsPermission">Manage settings</button>
+      </div>
+    </div>
+  </div>
+</div>

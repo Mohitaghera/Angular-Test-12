@@ -1,0 +1,14 @@
+<div class="container">
+  <app-sidebar></app-sidebar>
+
+  <div class="department-container">
+    <div class="department" *ngFor="let department of departments">
+      <p class="department-name">{{ department }}</p>
+
+      <div class="view-actions">
+        <button mat-button color="primary" [disabled]="!viewDepartmentPermission">View Departments</button>
+        <button mat-button color="primary" [disabled]="!manageDepartmentPermission">Manage Departments</button>
+      </div>
+    </div>
+  </div>
+</div>

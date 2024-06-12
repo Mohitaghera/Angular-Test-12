@@ -1,0 +1,45 @@
+.container {
+  display: grid;
+  grid-template-columns: 200px 1fr;
+  gap: 60px;
+}
+
+.job-container {
+  width: 90%;
+  margin-top: 16px;
+}
+.header {
+  display: flex;
+  justify-content: end;
+  margin-right: 12px;
+}
+
+.job {
+  padding: 10px;
+  margin: 20px;
+  margin-top: 0;
+  border: 1px solid black;
+  box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+
+  border-radius: 6px;
+}
+.add__Job--btn{
+  margin: 10px;
+}
+
+.job-header {
+  display: flex;
+  justify-content: space-between;
+}
+.job-name,.view{
+  font-size: 16px;
+}
+
+.jov-view {
+  margin-left: auto;
+  margin-top: 10px;
+  padding: 10px;
+  width: 50%;
+  border: 1px solid black;
+  border-radius: 4px;
+}

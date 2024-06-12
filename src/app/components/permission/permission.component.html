@@ -1,0 +1,125 @@
+<div class="container">
+  <app-sidebar></app-sidebar>
+
+  <div class="hero">
+    <div class="button-container">
+      <button (click)="setDefault()" mat-button>Set Default</button>
+      <button mat-button color="primary" (click)="toggleSelectAll()">
+        {{ selectAll ? "Select All" : "Deselect All" }}
+      </button>
+    </div>
+    <cdk-accordion class="example-accordion">
+      <ng-container *ngFor="let item of data; let index = index">
+        <cdk-accordion-item
+          #accordionItem="cdkAccordionItem"
+          class="example-accordion-item"
+          tabindex="0"
+          [attr.id]="'accordion-header-' + index"
+          [attr.aria-expanded]="accordionItem.expanded"
+          [attr.aria-controls]="'accordion-body-' + index"
+        >
+          <div class="example-accordion-item-header">
+            <div class="accordion-item-title">
+              <p class="accordion-item-name">{{ item.name }}</p>
+              <p class="show-actions-btn" (click)="accordionItem.toggle()">
+                Show all {{ item.permissions?.length }} Actions
+                <i
+                  class="fa"
+                  [ngClass]="
+                    accordionItem.expanded ? 'fa-angle-up' : 'fa-angle-down'
+                  "
+                  aria-hidden="true"
+                ></i>
+              </p>
+            </div>
+            <p class="toggle-btn">
+              <mat-slide-toggle
+                class="custom-slide-toggle"
+                [(ngModel)]="item.value"
+                (change)="onPermissionChange(item, null)"
+                [disabled]="item.isDisable"
+              ></mat-slide-toggle>
+            </p>
+          </div>
+          <div
+            class="example-accordion-item-body"
+            role="region"
+            [style.display]="accordionItem.expanded ? '' : 'none'"
+            [attr.id]="'accordion-body-' + index"
+            [attr.aria-labelledby]="'accordion-header-' + index"
+          >
+            <ng-container
+              *ngFor="let action of item.permissions; let subIndex = index"
+            >
+              <div class="example-accordion-item-header sub-accordion">
+                <div
+                  class="accordion-item-title sub-accordion-item-title"
+                  (click)="toggleNestedAccordion(index, subIndex)"
+                >
+                  <p class="sub-accordion-item-name">{{ action.name }}</p>
+                  <div *ngIf="action.permissions">
+                    <i
+                      class="fa"
+                      [ngClass]="
+                        nestedAccordionStates[index][subIndex]
+                          ? 'fa-angle-up'
+                          : 'fa-angle-down'
+                      "
+                      aria-hidden="true"
+                    ></i>
+                  </div>
+                </div>
+                <p class="toggle-btn">
+                  <mat-slide-toggle
+                    class="custom-slide-toggle"
+                    [(ngModel)]="action.value"
+                    (change)="onPermissionChange(item, action)"
+                    [disabled]="!item.value || action.isDisable"
+                  ></mat-slide-toggle>
+                </p>
+              </div>
+              <div
+                class="example-accordion-item-body"
+                role="region"
+                [style.display]="
+                  nestedAccordionStates[index][subIndex] ? '' : 'none'
+                "
+              >
+                <ng-container *ngIf="action.permissions">
+                  <div
+                    class="example-accordion-item-header sub-accordion"
+                    *ngFor="let subAction of action.permissions"
+                  >
+                    <div class="accordion-item-title sub-accordion-item-title">
+                      <p class="sub-accordion-item-name">
+                        {{ subAction.name }}
+                      </p>
+                      <div *ngIf="subAction.permissions">
+                        <i
+                          class="fa"
+                          [ngClass]="
+                            nestedAccordionStates[index][subIndex]
+                              ? 'fa-angle-up'
+                              : 'fa-angle-down'
+                          "
+                          aria-hidden="true"
+                        ></i>
+                      </div>
+                    </div>
+                    <p class="toggle-btn">
+                      <mat-slide-toggle
+                        class="custom-slide-toggle"
+                        [(ngModel)]="subAction.value"
+                        [disabled]="!item.value || subAction.isDisable || !action.value"
+                      ></mat-slide-toggle>
+                    </p>
+                  </div>
+                </ng-container>
+              </div>
+            </ng-container>
+          </div>
+        </cdk-accordion-item>
+      </ng-container>
+    </cdk-accordion>
+  </div>
+</div>

@@ -1,0 +1,14 @@
+<div class="container">
+  <app-sidebar></app-sidebar>
+
+  <div class="report-container">
+    <div class="report" *ngFor="let report of reports">
+      <p class="report-name">{{ report }}</p>
+
+      <div class="view-actions">
+        <button mat-button color="primary" [disabled]="!generateReportsPermission">Generate Reports</button>
+        <button mat-button color="primary" [disabled]="!ExportReportsPermission">Export Reports</button>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,14 @@
+<div class="container">
+  <app-sidebar></app-sidebar>
+
+  <div class="hire-container">
+    <div class="hire" >
+      <p class="hire-name">Hire</p>
+
+      <div class="view-actions">
+        <button mat-button color="primary" [disabled]="!createJobOpeningPermission">Create Job Opening</button>
+        <button mat-button color="primary" [disabled]="!reviewApplicationsPermission">Review Applications</button>
+      </div>
+    </div>
+  </div>
+</div>
