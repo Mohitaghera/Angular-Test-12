@@ -35,8 +35,8 @@ export class PermissionComponent implements OnInit {
   ngOnInit(): void {
     this.selectAll = this.permissionService.selectAll;
 
-    this.permissionService.getData().subscribe((data:any) => {
-        this.originalData = data;
+    this.permissionService.getData().subscribe((data: any) => {
+      this.originalData = data;
 
       this.permissionService.data.forEach((item: any, index: any) => {
         this.nestedAccordionStates[index] = [];
@@ -66,15 +66,8 @@ export class PermissionComponent implements OnInit {
     this.permissionService.data.forEach((item: any) => {
       if (!item.isDisable) {
         item.value = this.permissionService.selectAll;
-        this.updateNestedPermissions(item, this.permissionService.selectAll);
       }
-      else if(item.permissions){
-        item.permissions.forEach((i:any)=>{
-          if(!i.isDisable){
-            i.value = this.permissionService.selectAll;
-          }
-        })
-      }
+      this.updateNestedPermissions(item, this.permissionService.selectAll);
     });
     this.data = this.permissionService.data;
     this.permissionService.selectAll = !this.permissionService.selectAll;
@@ -86,7 +79,7 @@ export class PermissionComponent implements OnInit {
       !this.nestedAccordionStates[index][subIndex];
   }
 
-  onPermissionChange(item: any, action: any) {
+  onPermissionChange(item: any, action?: any) {
     if (action) {
       this.updateNestedPermissions(action, action.value);
     } else {
@@ -98,7 +91,6 @@ export class PermissionComponent implements OnInit {
     if (permission.permissions) {
       permission.permissions.forEach((subPermission: any) => {
         if (!subPermission.isDisable) {
-          subPermission.value = value;
           subPermission.value = value;
           this.updateNestedPermissions(subPermission, value);
         }
